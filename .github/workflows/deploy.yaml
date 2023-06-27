@@ -60,16 +60,3 @@ jobs:
       - name: Deploy
         run: gcloud app deploy
 
-      # - name: Run Backend tests
-      #   run: npm test
-
-      # - name: Run e2e tests
-      #   run: npx playwright test
-
-      # - uses: actions/upload-artifact@v3
-      #   if: always()
-      #   with:
-      #     name: playwright-report
-      #     path: playwright-report/
-      #     retention-days: 30
-

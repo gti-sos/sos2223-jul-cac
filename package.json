@@ -1,28 +1,26 @@
 {
-  "name": "sos2223-11",
+  "name": "sos2223-jul-cac",
   "version": "1.0.0",
   "description": "This is a project for D03",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node index",
-    "test-association-stats": "npx newman run ./tests/backend-association-stats.json -e ./tests/env/gcloud-env.json",
     "test-projection-homes-stats": "npx newman run ./tests/backend-projection-homes-stats.json -e ./tests/env/gcloud-env.json",
-    "test-phone-line-stats": "npx newman run ./tests/backend-phone-line-stats.json -e ./tests/env/gcloud-env.json",
-    "test": "npm run test-association-stats && npm run test-phone-line-stats",
+    "test": "npm run test-projection-homes-stats",
     "jest": "jest --coverage",
     "coverage-badges": "jest-coverage-badges coverage/coverage-final.json"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gti-sos/SOS2223-11.git"
+    "url": "git+https://github.com/gti-sos/sos2223-jul-cac.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gti-sos/SOS2223-11/issues"
+    "url": "https://github.com/gti-sos/sos2223-jul-cac/issues"
   },
-  "homepage": "https://github.com/gti-sos/SOS2223-11#readme",
+  "homepage": "https://github.com/gti-sos/sos2223-jul-cac#readme",
   "dependencies": {
     "@babel/preset-env": "^7.21.4",
     "body-parser": "^1.20.2",
