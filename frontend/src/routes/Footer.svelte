@@ -6,7 +6,7 @@
     <Container fluid dark class="bg-secondary py-2">
       <Row>
         <Col>
-          <div class="text-center">SOS Grupo 11</div>
+          <div class="text-center">SOS JUL CAC</div>
           <div class="text-center">&copy; 2023</div>
         </Col>
       </Row>

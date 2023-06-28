@@ -1,19 +1,9 @@
 <script>
     import { Container, Row, Col } from "sveltestrap";
 
-    let url = "https://sos2223-11.ew.r.appspot.com/";
+    let url = "https://sos2223-jul-cac.ew.r.appspot.com/";
 
     const teamMembers = [
-        {
-            name: "Víctor Ruiz Jiménez",
-            github: "https://github.com/vicruijim",
-            dataname: "phone-line-stats",
-        },
-        {
-            name: "Ignacio García Rodríguez",
-            github: "https://github.com/ign13101",
-            dataname: "association-stats",
-        },
         {
             name: "Christian Asuero Carrellán",
             github: "https://github.com/chrasucar342",
@@ -23,14 +13,14 @@
 </script>
 
 <svelte:head>
-    <title>SOS2223-11</title>
+    <title>SOS2223-JUL-CAC</title>
 </svelte:head>
 
 <Container>
     <div class="pageContainer">
         <br />
 
-        <h2 id="sos2223-11">SOS2223-11</h2>
+        <h2 id="sos2223-jul-cac">SOS2223-JUL-CAC</h2>
         <hr />
 
         <Row>
@@ -51,8 +41,7 @@
             <Col>
                 <p>
                     <strong>Descripción del proyecto</strong>: Nuestro proyecto
-                    tiene como objetivo analizar las correlaciones entre
-                    asociaciones, líneas de teléfono y estructuras de hogares.
+                    tiene como objetivo analizar las estructuras de los hogares.
                 </p>
             </Col>
         </Row>
@@ -61,8 +50,8 @@
             <Col>
                 <p>
                     <strong>Repositorio</strong>:
-                    <a href="https://github.com/gti-sos/SOS2223-11"
-                        >gti-sos/SOS2223-11</a
+                    <a href="https://github.com/gti-sos/sos2223-jul-cac"
+                        >gti-sos/sos2223-jul-cac</a
                     >
                 </p>
             </Col>
@@ -81,7 +70,7 @@
 
         <Row>
             <Col>
-                <p><strong>Interfaces</strong></p>
+                <p><strong>Interfaz</strong></p>
                 <ul>
                     {#each teamMembers as member}
                     <li>
