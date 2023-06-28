@@ -13,7 +13,7 @@
 
 - **Repository**: [gti-sos/sos2223-jul-cac](https://github.com/gti-sos/sos2223-jul-cac)
 
-- **URL**: [sos2223-jul-cac.ew.r.appspot.com](https://sos2223-jul-cac.ew.r.appspot.com)
+- **URL**: [https://sos2223-jul-cac.ew.r.appspot.com](https://sos2223-jul-cac.ew.r.appspot.com)
 
 - **Interfaces**
    - [https://sos2223-jul-cac.ew.r.appspot.com/projection-homes-stats](sos2223-jul-cac.ew.r.appspot.com/projection-homes-stats) (developed by Christian Asuero Carrellán)
