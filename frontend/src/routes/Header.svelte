@@ -16,7 +16,6 @@
 <header id="head">
   <Navbar dark expand="md" color="dark">
     <NavbarBrand href="/"><SvelteIcon /> &nbsp; <b> Sistemas Orientados a Servicios</b></NavbarBrand>
-
     <Nav navbar class="ml-auto">
       <NavItem>
         <NavLink href="/" class="text-white">Inicio</NavLink>
@@ -37,11 +36,6 @@
       <Dropdown nav inNavbar>
         <DropdownToggle nav caret class="text-white">Integraciones y Usos</DropdownToggle>
         <DropdownMenu end>
-          <DropdownItem
-          ><NavLink href="/integrations" class="text-black"
-            >Todas</NavLink
-          ></DropdownItem
-        >
           <DropdownItem
             ><NavLink href="/projection-homes-stats/integrations" class="text-black"
               >Christian</NavLink
