@@ -37,7 +37,7 @@
         <DropdownToggle nav caret class="text-white">Integraciones y Usos</DropdownToggle>
         <DropdownMenu end>
           <DropdownItem
-            ><NavLink href="/projection-homes-stats/integrations" class="text-black"
+            ><NavLink href="/integrations" class="text-black"
               >Christian</NavLink
             ></DropdownItem
           >

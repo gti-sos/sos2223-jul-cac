@@ -1,34 +1,77 @@
 <script>
-    // import { onMount } from "svelte";
+    // Importaciones
+
     import { dev } from "$app/environment";
-    import { Button, Container, Row, Col } from "sveltestrap";
+
+    import { Button, Container, Card, CardBody, CardTitle, CardText, Row, Col} from "sveltestrap";
 
     let API = "/api/v2/projection-homes-stats";
 
-    if (dev) API = "http://localhost:12345" + API;
+    if (dev) 
+    
+        API = "http://localhost:12345" + API;
 
-    let graphs = [
+    let rutasInternas = [
+
         {
-            author: "Víctor Ruiz Jimenez",
-            title: "Informe Anual de la South Australian Housing Trust Nuevas Asignaciones (externa)",
+            title: "Proyección de hogares sobre parejas (2002 - 2010)",
             technology: "Highcharts",
-            widget: "Line",
-            href: "/phone-line-stats/integrations/external/south-australian-housing"
+            widget: "Pie",
+            href: "/projection-homes-stats/integrations/highcharts"
+        },
+        {
+            title: "Gráfica grupal",
+            technology: "Highcharts",
+            widget: "Stacked Column",
+            href: "/analytics"
+        },
+        {
+            title: "Proyección de hogares por provincia (2002 - 2005)",
+            technology: "BillBoard",
+            widget: "AreaStep",
+            href: "/projection-homes-stats/integrations/billboard"
         },
     ];
-    
 
-    let groupedGraphs = [];
-    let currentAuthor = null;
+    let rutasExternas = [
 
-    for (let graph of graphs) {
-        if (graph.author !== currentAuthor) {
-            currentAuthor = graph.author;
-            groupedGraphs.push({ author: currentAuthor, graphs: [graph] });
-        } else {
-            groupedGraphs[groupedGraphs.length - 1].graphs.push(graph);
-        }
-    }
+        {
+            title: "Ranking Movies (API Externa)",
+            technology: "Plotly",
+            widget: "Bar",
+            href: "/projection-homes-stats/integrations/external/moviesIMDb"
+        },
+
+        {
+            title: "Flight SIA (API Externa)",
+            technology: "Plotly",
+            widget: "Pie",
+            href: "/projection-homes-stats/integrations/external/flight"
+        },
+
+        {
+            title: "Rates Bank (API Externa)",
+            technology: "Plotly",
+            widget: "Area",
+            href: "/projection-homes-stats/integrations/external/rates"
+        },
+
+        {
+            title: "Min Prices in Bratislava (API Externa)",
+            technology: "BillBoard",
+            widget: "Bar",
+            href: "/projection-homes-stats/integrations/external/prices"
+        },
+
+        {
+            title: "Scores in CS:GO (API Externa)",
+            technology: "BillBoard",
+            widget: "Spline",
+            href: "/projection-homes-stats/integrations/external/games"
+
+        },
+        
+    ];
 </script>
 
 <svelte:head>
@@ -37,29 +80,60 @@
 
 <Container class="bg-light border my-5 mx-auto">
     <div class="py-3 px-3">
-        <h2 class="p-1 mb-3">Gráficas</h2>
-        {#each groupedGraphs as group}
-            <h3 class="px-3 pt-2">{group.author}</h3>
-            {#each group.graphs as graph}
-                <Row
-                    class="justify-content-center align-items-center mx-5 py-3 my-3 border"
-                >
-                    <Col>
-                        <h4>{graph.title}</h4>
-                    </Col>
-
-                    <Col class="mx-5">
-                        <i>Tecnología: {graph.technology}</i> <br />
-                        <i>Widget: {graph.widget}</i>
-                    </Col>
-
-                    <Col class="text-center">
-                        <Button color="primary" href={graph.href}>
-                            Visualizar
-                        </Button>
-                    </Col>
-                </Row>
-            {/each}
+      <h2 class="p-2 mb-3"><center>Gráficas Internas</center></h2>
+      <Row>
+        {#each rutasInternas as r, i (r.href)}
+          {#if i % 3 === 0}
+            <Row></Row>
+          {/if}
+          <Col class="mb-4">
+            <Card>
+              <CardBody>
+                <center>
+                <CardTitle tag="h4">{r.title}</CardTitle>
+                </center>
+                <CardText>
+                  <center>
+                  <strong>Biblioteca:</strong> {r.technology}<br>
+                  <strong>Widget:</strong> {r.widget}
+                  </center>
+                </CardText>
+                <center>
+                <Button color="success" href={r.href}><center>Mostrar</center></Button>
+                </center>
+              </CardBody>
+            </Card>
+          </Col>
         {/each}
+      </Row>
     </div>
-</Container>
+    
+    <div class="py-3 px-3">
+      <h2 class="p-2 mb-3"><center>Gráficas Externas</center></h2>
+      <Row>
+        {#each rutasExternas as r, i (r.href)}
+          {#if i % 3 === 0}
+            <Row></Row>
+          {/if}
+          <Col class="mb-4">
+            <Card>
+              <CardBody>
+                <center>
+                <CardTitle tag="h4">{r.title}</CardTitle>
+                </center>
+                <CardText>
+                  <center>
+                  <strong>Biblioteca:</strong> {r.technology}<br>
+                  <strong>Widget:</strong> {r.widget}
+                  </center>
+                </CardText>
+                <center>
+                <Button color="success" href={r.href}><center>Mostrar</center></Button>
+                </center>
+              </CardBody>
+            </Card>
+          </Col>
+        {/each}
+      </Row>
+    </div>
+  </Container>
