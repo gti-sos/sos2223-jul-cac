@@ -1,5 +1,6 @@
 <script>
     import { Container, Row, Col } from "sveltestrap";
+    import Footer from "./Footer.svelte";
 
     let url = "https://sos2223-jul-cac.appspot.com/";
 
@@ -158,6 +159,12 @@
         <br />
     </div>
 </Container>
+
+<main>
+
+    <Footer/>
+
+</main>
 
 <style>
     .pageContainer {

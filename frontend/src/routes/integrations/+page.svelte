@@ -17,7 +17,7 @@
             title: "Proyección de hogares sobre parejas (2002 - 2010)",
             technology: "Highcharts",
             widget: "Pie",
-            href: "/projection-homes-stats/integrations/highcharts"
+            href: "/integrations/highcharts"
         },
         {
             title: "Gráfica grupal",
@@ -29,7 +29,7 @@
             title: "Proyección de hogares por provincia (2002 - 2005)",
             technology: "BillBoard",
             widget: "AreaStep",
-            href: "/projection-homes-stats/integrations/billboard"
+            href: "/integrations/billboard"
         },
     ];
 
@@ -39,35 +39,35 @@
             title: "Ranking Movies (API Externa)",
             technology: "Plotly",
             widget: "Bar",
-            href: "/projection-homes-stats/integrations/external/moviesIMDb"
+            href: "/integrations/external/moviesIMDb"
         },
 
         {
             title: "Flight SIA (API Externa)",
             technology: "Plotly",
             widget: "Pie",
-            href: "/projection-homes-stats/integrations/external/flight"
+            href: "/integrations/external/flight"
         },
 
         {
             title: "Rates Bank (API Externa)",
             technology: "Plotly",
             widget: "Area",
-            href: "/projection-homes-stats/integrations/external/rates"
+            href: "/integrations/external/rates"
         },
 
         {
             title: "Min Prices in Bratislava (API Externa)",
             technology: "BillBoard",
             widget: "Bar",
-            href: "/projection-homes-stats/integrations/external/prices"
+            href: "/integrations/external/prices"
         },
 
         {
             title: "Scores in CS:GO (API Externa)",
             technology: "BillBoard",
             widget: "Spline",
-            href: "/projection-homes-stats/integrations/external/games"
+            href: "/integrations/external/games"
 
         },
         
