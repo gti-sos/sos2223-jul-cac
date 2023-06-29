@@ -1,7 +1,7 @@
 <script>
     import { Container, Row, Col } from "sveltestrap";
 
-    let url = "https://sos2223-jul-cac.ew.r.appspot.com/";
+    let url = "https://sos2223-jul-cac.appspot.com/";
 
     const teamMembers = [
         {
