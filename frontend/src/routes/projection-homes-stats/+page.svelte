@@ -637,8 +637,10 @@
         <!-- Paginación: 10 resultados por página -->
 
         <center>
+
             <Button color="danger" on:click={previousPage}>Anterior</Button>
             <Button color="success" on:click={nextPage}>Siguiente</Button>
+            
         </center>
     {/if}
 </Container>

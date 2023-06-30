@@ -1,4 +1,5 @@
 <script>
+  
     // Importaciones
 
     import { dev } from "$app/environment";
@@ -19,12 +20,7 @@
             widget: "Pie",
             href: "/integrations/highcharts"
         },
-        {
-            title: "Gráfica grupal",
-            technology: "Highcharts",
-            widget: "Stacked Column",
-            href: "/analytics"
-        },
+  
         {
             title: "Proyección de hogares por provincia (2002 - 2005)",
             technology: "BillBoard",
@@ -34,34 +30,6 @@
     ];
 
     let rutasExternas = [
-
-        {
-            title: "Ranking Movies (API Externa)",
-            technology: "Plotly",
-            widget: "Bar",
-            href: "/integrations/external/moviesIMDb"
-        },
-
-        {
-            title: "Flight SIA (API Externa)",
-            technology: "Plotly",
-            widget: "Pie",
-            href: "/integrations/external/flight"
-        },
-
-        {
-            title: "Rates Bank (API Externa)",
-            technology: "Plotly",
-            widget: "Area",
-            href: "/integrations/external/rates"
-        },
-
-        {
-            title: "Min Prices in Bratislava (API Externa)",
-            technology: "BillBoard",
-            widget: "Bar",
-            href: "/integrations/external/prices"
-        },
 
         {
             title: "Scores in CS:GO (API Externa)",

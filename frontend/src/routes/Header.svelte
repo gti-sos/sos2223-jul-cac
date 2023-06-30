@@ -1,4 +1,5 @@
 <script>
+
   import {
     Navbar,
     NavbarBrand,
@@ -10,7 +11,9 @@
     DropdownMenu,
     DropdownItem,
   } from "sveltestrap";
+
   import SvelteIcon from './SvelteIcon.svelte'
+
 </script>
 
 <header id="head">
@@ -23,26 +26,12 @@
       <NavItem>
         <NavLink href="/about" class="text-white">Vídeo</NavLink>
       </NavItem>
-      <Dropdown nav inNavbar>
-        <DropdownToggle nav caret class="text-white">Interfaz</DropdownToggle>
-        <DropdownMenu end>
-          <DropdownItem
-            ><NavLink href="/projection-homes-stats" class="text-black"
-              >Proyección de hogares</NavLink
-            ></DropdownItem
-          >
-        </DropdownMenu>
-      </Dropdown>
-      <Dropdown nav inNavbar>
-        <DropdownToggle nav caret class="text-white">Integraciones y Usos</DropdownToggle>
-        <DropdownMenu end>
-          <DropdownItem
-            ><NavLink href="/integrations" class="text-black"
-              >Christian</NavLink
-            ></DropdownItem
-          >
-        </DropdownMenu>
-      </Dropdown>
+      <NavItem>
+        <NavLink href="/projection-homes-stats" class="text-white">Interfaz</NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink href="/integrations" class="text-white">Integraciones y Usos</NavLink>
+      </NavItem>
     </Nav>
   </Navbar>
 </header>

@@ -23,7 +23,9 @@
 
 <Container>
     <div class="m-4">
-        <h2 class="my-3">Vídeo de Christian Asuero Carrellán</h2>
+        <center>
+        <h3 class="my-3"> &nbsp; &nbsp; Vídeo de Christian Asuero Carrellán</h3>
+        </center>
         <div class="m-2">
             <iframe
             title="SOS2223-JUL-CAC Christian Asuero Carrellán"
@@ -35,6 +37,8 @@
                 allowfullscreen
             ></iframe>
         </div>
-        <Button href="https://drive.google.com/file/d/14ocLB89IGhqF4W-UNDTQPMhLQB1Mm5zg/view?usp=share_link">Vídeo en Google Drive</Button>
+        <center>
+        <Button color = "primary" href="https://drive.google.com/file/d/14ocLB89IGhqF4W-UNDTQPMhLQB1Mm5zg/view?usp=share_link">Vídeo en Google Drive</Button>
+        </center>
     </div>
 </Container>
