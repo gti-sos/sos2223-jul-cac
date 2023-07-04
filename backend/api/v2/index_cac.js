@@ -320,11 +320,11 @@ app.post(BASE_API_URL_PROJECT, (request, response) => {
 
     console.log(`New POST request to /projection-homes-stats`);
 
-    if(!(requestValid)) {
+    if(!requestValid || yearReq < 0 || couple_childrenReq < 0 || couple_nochildrenReq < 0 || single_parentReq < 0) {
 
         console.log(request.body);
 
-        console.log("More than 5 values and parsers not valids");
+        console.log("More than 5 values and parsers not valids or fields < 0");
 
         response.sendStatus(400); // Bad Request
 
@@ -405,7 +405,8 @@ app.put(BASE_API_URL_PROJECT + "/:province/:year", (request, response) => {
                        && couple_nochildrenReq && single_parentReq
                        && Object.values(request.body).length == 5;
 
-    if(requestValid && (provinceParam === request.body.province && parseInt(request.body.year) === yearParam)) {
+    if(requestValid && couple_childrenReq > 0 && couple_nochildrenReq > 0 && single_parentReq > 0
+        && provinceParam === request.body.province && yearParam === parseInt(request.body.year)) {
 
         db.update({year: yearParam, province: provinceParam}, {
 
@@ -476,6 +477,14 @@ app.delete(BASE_API_URL_PROJECT, (request, response) => {
 
             response.sendStatus(500); // Internal Server Error
 
+        }
+
+        else if(removed == 0) {
+
+            console.log("0 Datas removed");
+
+            response.sendStatus(404); // Not Found
+            
         }
 
         else {

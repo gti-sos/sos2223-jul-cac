@@ -96,6 +96,8 @@ var projectionHomes = [
 
 const BASE_API_URL_PROJECT = "/api/v1/projection-homes-stats";
 
+//--------------------------------------Métodos GET-------------------------------------
+
 // Redirigir al enlace /docs para la colección de llamadas de postman
 
 app.get(BASE_API_URL_PROJECT + "/docs", (request, response) => {
@@ -135,8 +137,6 @@ app.get(BASE_API_URL_PROJECT + "/loadInitialData", (request, response) => {
         }
     })
     });
-
-//--------------------------------------Métodos GET-------------------------------------
 
 // Obtener datos desde un punto a otro
 
@@ -231,7 +231,7 @@ app.get(BASE_API_URL_PROJECT + "/:province", (request, response) => {
 
                 console.log("0 datas");
 
-                response.sendStatus(404); // Page, Data Not Found
+                response.sendStatus(404); // Data Not Found
 
             }
 
@@ -285,8 +285,6 @@ app.get(BASE_API_URL_PROJECT + "/:province/:year", (request, response) => {
 
 app.post(BASE_API_URL_PROJECT, (request, response) => {
 
-    console.log(request.body);
-
     var provinceReq = request.body.province;
     var yearReq = parseInt(request.body.year);
     var couple_childrenReq = parseInt(request.body.couple_children);
@@ -301,11 +299,11 @@ app.post(BASE_API_URL_PROJECT, (request, response) => {
 
     console.log(`New POST request to /projection-homes-stats`);
 
-    if(!(requestValid)) {
+    if(!requestValid || yearReq < 0 || couple_childrenReq < 0 || couple_nochildrenReq < 0 || single_parentReq < 0) {
 
         console.log(request.body);
 
-        console.log("More than 5 values and parsers not valids");
+        console.log("More than 5 values and parsers not valids or fields < 0");
 
         response.sendStatus(400); // Bad Request
 
@@ -386,7 +384,8 @@ app.put(BASE_API_URL_PROJECT + "/:province/:year", (request, response) => {
                        && couple_nochildrenReq && single_parentReq
                        && Object.values(request.body).length == 5;
 
-    if(requestValid && (provinceParam === request.body.province && parseInt(request.body.year) === yearParam)) {
+    if(requestValid && couple_childrenReq > 0 && couple_nochildrenReq > 0 && single_parentReq > 0
+         && provinceParam === request.body.province && yearParam === parseInt(request.body.year)) {
 
         db.update({year: yearParam, province: provinceParam}, {
 
@@ -399,6 +398,7 @@ app.put(BASE_API_URL_PROJECT + "/:province/:year", (request, response) => {
                 single_parent: single_parentReq
 
             }
+
         }, (error, replaced) => {
 
             if(error) {
@@ -424,6 +424,8 @@ app.put(BASE_API_URL_PROJECT + "/:province/:year", (request, response) => {
 
                     console.log(`Updated ${replaced} projectionHome`);
 
+                    console.log(request.body);
+
                     response.sendStatus(200); // Ok
 
                 }
@@ -436,7 +438,7 @@ app.put(BASE_API_URL_PROJECT + "/:province/:year", (request, response) => {
 
         console.log("Body not valid or params not equals");
 
-        response.sendStatus(400); // Not Found
+        response.sendStatus(400); // Bad Request
     }
 
     });
@@ -457,6 +459,14 @@ app.delete(BASE_API_URL_PROJECT, (request, response) => {
 
             response.sendStatus(500); // Internal Server Error
 
+        }
+
+        else if(removed == 0) {
+
+            console.log("0 Datas removed");
+
+            response.sendStatus(404); // Not Found
+            
         }
 
         else {
