@@ -299,11 +299,11 @@ app.post(BASE_API_URL_PROJECT, (request, response) => {
 
     console.log(`New POST request to /projection-homes-stats`);
 
-    if(!requestValid || yearReq < 0 || couple_childrenReq < 0 || couple_nochildrenReq < 0 || single_parentReq < 0) {
+    if(!requestValid || yearReq < 2000 || couple_childrenReq < 0 || couple_nochildrenReq < 0 || single_parentReq < 0) {
 
         console.log(request.body);
 
-        console.log("More than 5 values and parsers not valids or fields < 0");
+        console.log("More than 5 values and parsers not valids or fields < 0 or year < 2000");
 
         response.sendStatus(400); // Bad Request
 
