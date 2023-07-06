@@ -3,6 +3,7 @@
 import Datastore from 'nedb';
 
 var db = new Datastore();
+var noData = false;
 
 // Modularizar la app
 
@@ -132,9 +133,19 @@ app.get(BASE_API_URL_PROJECT + "/loadInitialData", (request, response) => {
 
         }
 
+        else if(count > 0) {
+
+            console.log("More than 0 datas");
+
+            response.sendStatus(409);
+            
+        }
+
         else {
 
             if(count === 0) {
+
+                noData = true;
 
                 db.insert(projectionHomes);
 
@@ -188,17 +199,15 @@ app.get(BASE_API_URL_PROJECT, (request, response) => {
 
             response.sendStatus(500); // Internal Server Error
 
+        } 
+
+        else if(data.length === 0) {
+
+            console.log("0 datas");
+
+            response.json(data);
+
         }
-
-        else {
-
-            if(data.length === 0) {
-
-                console.log("0 datas");
-
-                response.json(data);
-
-            }
 
             else {
 
@@ -213,11 +222,9 @@ app.get(BASE_API_URL_PROJECT, (request, response) => {
                 });
 
                 response.json(data);
-
-            }
         }
     });
-})
+});
 
 // Obtener datos de una provincia
 
@@ -250,7 +257,7 @@ app.get(BASE_API_URL_PROJECT + "/:province", (request, response) => {
 
                 console.log("0 datas");
 
-                response.sendStatus(404); // Page, Data Not Found
+                response.sendStatus(404); // Not Found
 
             }
 

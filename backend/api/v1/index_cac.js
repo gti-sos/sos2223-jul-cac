@@ -122,6 +122,14 @@ app.get(BASE_API_URL_PROJECT + "/loadInitialData", (request, response) => {
 
         }
 
+        else if(count > 0) {
+
+            console.log("More than 0 datas");
+
+            response.sendStatus(409);
+            
+        }
+
         else {
 
             if(count === 0) {
@@ -171,15 +179,13 @@ app.get(BASE_API_URL_PROJECT, (request, response) => {
 
         }
 
-        else {
+        else if(data.length === 0) {
 
-            if(data.length === 0) {
+            console.log("0 datas");
 
-                console.log("0 datas");
+            response.json(data);
 
-                response.json(data);
-
-            }
+        }
 
             else {
 
@@ -196,9 +202,8 @@ app.get(BASE_API_URL_PROJECT, (request, response) => {
                 response.json(data);
 
             }
-        }
     });
-})
+});
 
 // Obtener datos de una provincia
 
@@ -227,13 +232,21 @@ app.get(BASE_API_URL_PROJECT + "/:province", (request, response) => {
     db.find(search).sort({year : 1, province : -1, couple_children : -2, couple_nochildren : -3, single_parent : -4})
     .skip(offset).limit(limit).exec((error, data) => {
 
-            if(data.length === 0) {
+        if(error) {
 
-                console.log("0 datas");
+            console.log("Error getting data");
 
-                response.sendStatus(404); // Data Not Found
+            response.sendStatus(500); // Internal Server Error
 
-            }
+        } 
+
+        else if(data.length === 0) {
+
+            console.log("0 datas");
+
+            response.sendStatus(404); // Not Found
+
+        }
 
             else {
 

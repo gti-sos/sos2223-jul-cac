@@ -31,7 +31,9 @@
     // Obtener proyección de hogares
 
     onMount(async () => {
+        
         getProjection();
+        
     });
 
     let API = "/api/v2/projection-homes-stats";
@@ -61,6 +63,8 @@
 
     let offset = 0;
     let limit = 10;
+    let hasNextPage = false;
+    let hasPreviousPage = false;
     let province = "";
     let year = "";
     let couple_children = "";
@@ -84,30 +88,70 @@
     // Paginación
 
     function nextPage() {
+
         offset += limit;
 
-        getProjection();
+        if (hasFilters()) {
+
+            getProjectionFilters();
+
+        } 
+
+        else {
+
+            getProjection();
+
+        }
+
     }
 
     function previousPage() {
+
         offset = Math.max(offset - limit, 0);
 
-        getProjection();
+        if (hasFilters()) {
+
+            getProjectionFilters();
+
+        } 
+
+        else {
+
+            getProjection();
+
+        }
+
+    }
+
+    function hasFilters() {
+
+        return province || year || couple_children || couple_nochildren || single_parent;
+
     }
 
     // Alerta de mensaje desactivado
 
     function dismissAlert() {
+
         messageAlert = false;
+
     }
 
     // Formulario
 
     function toggleForm() {
+
         showForm = !showForm;
 
         messageAlert = false;
+
     }
+
+    // CSS
+
+    let botones = "creacionBotones";
+
+    let botonesAviso = "botonesDeAviso";
 
     // Obtener proyecciones
 
@@ -116,15 +160,22 @@
         resultStatus = result = "";
 
         const res = await fetch(API + `?offset=${offset}&limit=${limit}`, {
+
             method: "GET",
+
         });
 
         try {
+            
             const data = await res.json();
 
             result = JSON.stringify(data, null, 2);
 
             projection = data;
+
+            hasNextPage = data.length === limit;
+
+            hasPreviousPage = offset > 0;
 
         } 
         
@@ -140,95 +191,171 @@
 
         if (status == 500) {
 
-            message = "Error interno del servidor";
+            message = "Error interno del servidor.";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
 
             color = "danger";
+
         }
     }
 
     // Filtros: Buscar por cualquier campo
 
     async function getProjectionFilters() {
+
         const consult = {};
 
         if (province) {
+
             consult.province = province;
+
         }
 
         if (year) {
+
             consult.year = year;
+
         }
 
         if (couple_children) {
+
             consult.couple_children = couple_children;
+
         }
 
         if (couple_nochildren) {
+
             consult.couple_nochildren = couple_nochildren;
+
         }
 
         if (single_parent) {
+
             consult.single_parent = single_parent;
+
         }
 
         const res = await fetch(
-            API + `?${new URLSearchParams(consult).toString()}`,
+
+            API + `?offset=${offset}&limit=${limit}&${new URLSearchParams(consult).toString()}`,
             {
                 method: "GET",
             }
+
         );
 
         try {
+
             const data = await res.json();
 
             result = JSON.stringify(data, null, 2);
 
             projection = data;
-        } catch (error) {
+
+            hasNextPage = data.length === limit;
+
+            hasPreviousPage = offset > 0;
+
+        } 
+        
+        catch (error) {
+
             console.log(`Error parseando el resultado: ${error}`);
+
         }
 
         const status = await res.status;
 
         resultStatus = status;
 
-        if (projection.length > 0) {
+        if(projection.length > 0) {
+
+                messageAlert = true;
+
+                message = "Datos mostrados de los filtros introducidos.";
+
+                setTimeout(() => {message = '';}, 3000);
+
+                setTimeout(() => {color = '';}, 3000);
+
+                setTimeout(() => {messageAlert = '';}, 3000);
+
+                color = "success";
+
+        } 
+        
+        else {
+
             messageAlert = true;
 
-            message = "Datos mostrados del filtro introducido";
+            message = "No se han podido encontrar los datos.";
 
-            color = "success";
-        } else {
-            messageAlert = true;
+            setTimeout(() => {message = '';}, 3000);
 
-            message = "No se han podido encontrar los datos";
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
 
             color = "danger";
+
         }
+
     }
 
     // Limpiar todos los filtros
 
     async function getDeleteFilters() {
+
         resultStatus = result = "";
 
-        if (
-            province != "" ||
-            year != "" ||
-            couple_children != "" ||
-            couple_nochildren != "" ||
-            single_parent != ""
-        ) {
+        if (province != "" || year != "" || couple_children != "" 
+        || couple_nochildren != "" || single_parent != "") {
+
             province = "";
             year = "";
             couple_children = "";
             couple_nochildren = "";
             single_parent = "";
+
+            messageAlert = true;
+
+            message = "Filtros eliminados.";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
+
+            color = "success";
+
+        }
+
+        else {
+
+            messageAlert = true;
+
+            message = "No hay filtros introducidos.";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
+
+            color = "dark";
+
         }
 
         getProjection();
 
         return;
+
     }
 
     // Cargar los datos
@@ -238,27 +365,63 @@
         messageAlert = false;
 
         const res = await fetch(API + "/loadInitialData", {
+
             method: "GET",
+
         });
 
         const status = await res.status;
 
-        if (status == 200) {
+        if(status === 409) {
+
+            messageAlert = true;
+
+            message = "Las proyecciones ya están cargadas.";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
+
+            color = "warning";
+
+        }
+
+        else if(status === 200) {
+
             getProjection();
 
             messageAlert = true;
 
-            message = "Proyecciones cargadas";
+            message = "Proyecciones cargadas.";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
 
             color = "success";
-        } else {
+
+        } 
+
+        else {
+
             messageAlert = true;
 
-            message =
-                "No se han podido cargar las proyecciones o ya están cargadas";
+            message = "No se han podido cargar las proyecciones.";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
 
             color = "danger";
+
         }
+
     }
 
     // Crear una proyección
@@ -266,41 +429,62 @@
     let dataInserted = [];
 
     async function createProjection() {
+
         resultStatus = result = "";
 
         messageAlert = false;
 
         const newProjection = {
+
             province: newProvince,
             year: parseInt(newYear),
             couple_children: parseInt(newCoupleChildren),
             couple_nochildren: parseInt(newCoupleNoChildren),
             single_parent: parseInt(newSingleParent),
+
         };
 
         const existingData = dataInserted.find(
+            
             (data) =>
                 data.province === newProvince &&
                 data.year === newYear &&
                 data.couple_children === newCoupleChildren &&
                 data.couple_nochildren === newCoupleNoChildren &&
                 data.single_parent === newSingleParent
+
         );
 
         if (existingData) {
-            message = "Ya existe el dato";
+
+            messageAlert = true;
+
+            message = "Ya existe el dato.";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
+
+            color = "warning";
 
             return;
+
         }
 
         const res = await fetch(API, {
+
             method: "POST",
 
             headers: {
+
                 "Content-Type": "application/json",
+
             },
 
             body: JSON.stringify(newProjection),
+
         });
 
         const status = await res.status;
@@ -308,45 +492,87 @@
         resultStatus = status;
 
         if (status == 201) {
+
             getProjection();
 
             toggleForm();
 
             messageAlert = true;
 
-            message = "Proyección creada con éxito";
+            message = "Proyección creada con éxito.";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
 
             color = "success";
-        } else if (status == 409) {
+
+        } 
+        
+        else if (status == 409) {
+
             messageAlert = true;
 
             message = `Los campos Provincia: ${newProvince} y Año: ${newYear} ya existen`;
 
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
+
             color = "warning";
-        } else if (status == 400) {
+
+        } 
+        
+        else if (status == 400) {
+
             messageAlert = true;
 
-            message = "Faltan campos para crear la proyección";
+            message = "Los datos introducidos no son correctos.";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
 
             color = "warning";
-        } else {
+
+        } 
+        
+        else {
+
             messageAlert = true;
 
-            message = "No se ha podido crear la proyección";
+            message = "No se ha podido crear la proyección.";
 
             getProjection();
 
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
+
             color = "danger";
+
         }
     }
 
     // Borrar proyecciones
 
     async function deleteProjections() {
+
         resultStatus = result = "";
 
+
         const res = await fetch(API, {
+
             method: "DELETE",
+
         });
 
         const status = await res.status;
@@ -354,29 +580,51 @@
         resultStatus = status;
 
         if (status == 200) {
+
             getProjection();
 
             messageAlert = true;
 
-            message = "Se eliminaron todas las proyecciones";
+            message = "Se han eliminado todas las proyecciones.";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
 
             color = "success";
-        } else {
+
+        } 
+        
+        else {
+
             messageAlert = true;
 
-            message = "No existen proyecciones";
+            message = "No existen proyecciones.";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
 
             color = "danger";
+
         }
     }
 
     // Borrar una proyección
 
     async function deleteProjection(province, year) {
+
         resultStatus = result = "";
 
+
         const res = await fetch(API + "/" + province + "/" + year, {
+
             method: "DELETE",
+
         });
 
         const status = await res.status;
@@ -384,37 +632,70 @@
         resultStatus = status;
 
         if (status == 200) {
+
             messageAlert = true;
 
-            message = `La proyección de ${province} del año ${year} ha sido eliminada`;
+            message = `La proyección de ${province} del año ${year} ha sido eliminada.`;
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
 
             color = "success";
 
             getProjection();
-        } else if (status == 500) {
+
+        } 
+        
+        else if (status == 500) {
+
             messageAlert = true;
 
             message = "Error interno del servidor";
 
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
+
             color = "danger";
-        } else if (status == 404) {
+
+        } 
+        
+        else if (status == 404) {
+
             messageAlert = true;
 
-            message = `La proyección de ${province} del año ${year} no ha podido ser eliminada`;
+            message = `La proyección de ${province} del año ${year} no ha podido ser eliminada.`;
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
 
             color = "danger";
+
         }
     }
 
     // Volver a la API principal
 
     async function view() {
+
         window.location.href =
-            "https://sos2223-11.appspot.com/projection-homes-stats";
+
+            "https://sos2223-jul-cac.appspot.com/projection-homes-stats";
+
     }
+
 </script>
 
 <h2>
+
     <!-- Alertas proyecciones: Borrar todos los recursos -->
 
     <Modal isOpen={open} {toggle}>
@@ -439,11 +720,12 @@
 
     <Modal isOpen={openOne} {toggleOne}>
         <ModalHeader {toggleOne}
-            >Atención: Vas a borrar el recurso seleccionado de la base de datos</ModalHeader
+            >Atención: Vas a borrar el recurso seleccionado de la base de datos.</ModalHeader
         >
-        <ModalBody>¿Estás seguro?</ModalBody>
+        <ModalBody><center>¿Estás seguro?</center></ModalBody>
         <ModalFooter>
             <Button
+                class = {botonesAviso}
                 color="danger"
                 on:click={() => {
                     deleteProjection(provinceDelete, yearDelete);
@@ -451,7 +733,12 @@
                 }}
                 >Eliminar
             </Button>
-            <Button color="secondary" on:click={toggleOne}>Cancelar</Button>
+            <Button 
+                class = {botonesAviso} 
+                color="secondary" 
+                on:click={toggleOne}
+            >Cancelar
+            </Button>
         </ModalFooter>
     </Modal>
 </h2>
@@ -511,9 +798,10 @@
 
                     <center>
                         <div class="buttons" style="text-align: center">
-                            <Button color="success" type="submit">Crear</Button>
+                            
+                            <Button class={botones} color="success" type="submit">Crear</Button>
 
-                            <Button color="info" on:click={view}>Atrás</Button>
+                            <Button class={botones} color="info" on:click={view}>Atrás</Button>
                         </div>
                     </center>
                 </FormGroup>
@@ -522,6 +810,7 @@
     {/if}
 
     {#if !showForm}
+
         <h2>
             <center><p>Proyecciones de hogares: {projection.length}</p></center>
         </h2>
@@ -530,32 +819,27 @@
 
         <center>
             <Button id="createProjection" color="primary" on:click={toggleForm}
-                >Crear Proyección</Button
-            >
+                >Crear Proyección</Button>
 
             <!--Cargar proyeccion -->
 
             <Button color="success" on:click={loadData}
-                >Cargar proyecciones</Button
-            >
+                >Cargar proyecciones</Button>
 
             <!--Borrar proyecciones -->
 
             <Button color="danger" on:click={toggle}
-                >Eliminar proyecciones</Button
-            >
+                >Eliminar proyecciones</Button>
 
             <!--Filtrar campos -->
 
             <Button color="warning" on:click={getProjectionFilters}
-                >Filtrar</Button
-            >
+                >Filtrar</Button>
 
             <!--Limpiar filtros -->
 
             <Button color="dark" on:click={getDeleteFilters}
-                >Limpiar Filtros</Button
-            >
+                >Limpiar Filtros</Button>
 
         </center>
 
@@ -598,6 +882,7 @@
                     <th>Parejas con hijos</th>
                     <th>Parejas sin hijos</th>
                     <th>Personas solteras</th>
+                    <th colspan = "2">Acciones</th>
                 </tr>
             </thead>
 
@@ -616,8 +901,8 @@
                                     href="/projection-homes-stats/{projections.province}/{projections.year}"
                                     >Actualizar
                                 </Button>
-                                <br />
-                                <br />
+                                <br/>
+                                <br/>
 
                                 <Button
                                     color="danger"
@@ -638,8 +923,8 @@
 
         <center>
 
-            <Button color="danger" on:click={previousPage}>Anterior</Button>
-            <Button color="success" on:click={nextPage}>Siguiente</Button>
+            <Button color="danger" on:click={previousPage} disabled={!hasPreviousPage}>Anterior</Button>
+            <Button color="success" on:click={nextPage} disabled={!hasNextPage}>Siguiente</Button>
             
         </center>
     {/if}

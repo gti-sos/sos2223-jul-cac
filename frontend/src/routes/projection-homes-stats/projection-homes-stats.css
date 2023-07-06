@@ -20,6 +20,24 @@ Button {
 
 }
 
+.creacionBotones {
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    text-decoration: none;
+
+}
+
+.botonesDeAviso {
+
+    display: inline-block;
+
+    margin: 0 auto;
+
+}
+
 div.filtros {
 
     display: grid;

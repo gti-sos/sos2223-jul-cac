@@ -32,7 +32,7 @@
 
     if (dev) 
     
-        API = "https://sos2223-11.ew.r.appspot.com" + API;
+        API = "http://localhost:12345" + API;
 
     // Alertas de mensajes
 
@@ -45,21 +45,10 @@
     let dato = [];
     let result = "";
     let resultStatus = "";
-    let showForm = false;
 
     // Quitar alerta
 
     function dismissAlert() {
-
-        messageAlert = false;
-
-    }
-
-    // Formulario
-
-    function toggleForm() {
-
-        showForm = !showForm;
 
         messageAlert = false;
 
@@ -114,13 +103,29 @@
 
         if(status == 404) {
 
-            message = `La provincia ${province} del año ${year} no ha sido encontrada`;
+            message = `La provincia ${province} del año ${year} no ha sido encontrada.`;
+
+            color = "warning";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
 
         }
 
         if(status == 500) {
 
-            message = "Error interno";
+            message = "Error interno.";
+
+            color = "danger";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
 
         }
 
@@ -164,7 +169,13 @@
 
             messageAlert = true;
 
-            message = "Proyección actualizada";
+            message = "Proyección actualizada.";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
 
             color = "success";
 
@@ -176,21 +187,26 @@
 
             messageAlert = true;
 
-            message = "Se ha intentado cambiar provincia y año o faltan campos por rellenar";
+            message = "La provincia y el año no se pueden cambiar o introdujo datos incorrectos.";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
 
             color = "warning";
 
             getProjection();
 
-        } 
-
+        }  
         }
 
     // Volver a la API principal
 
     async function view() {
 
-        window.location.href = "https://sos2223-11.appspot.com/projection-homes-stats";
+        window.location.href = "https://sos2223-jul-cac.appspot.com/projection-homes-stats";
 
     }
 
