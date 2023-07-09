@@ -68,10 +68,10 @@
 
         {
 
-        title: "Estadísticas de equipos NFL.",
+        title: "Estadísticas de canciones de David Guetta.",
         technology: "Chart",
         widget: "Radar",
-        href: "/integrations/external/teams"
+        href: "/integrations/external/songs"
 
         }
         
