@@ -372,8 +372,6 @@
 
         const status = await res.status;
 
-        
-
         if(status == 200) {
 
             getProjection();
@@ -392,7 +390,7 @@
 
         } 
 
-        else if(status === 409) {
+        else if(projection.length > 0) {
 
             messageAlert = true;
 
