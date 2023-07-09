@@ -136,7 +136,7 @@ test('Verifies access of integrations route -> Apexcharts', async ({ page }) => 
 
 });
 
-test('Verifies access of integrations route -> Canvas', async ({ page }) => {
+test('Verifies access of integrations route -> Canvas 2', async ({ page }) => {
 
   await page.goto('http://sos2223-jul-cac.appspot.com/integrations/external/songs');
 
