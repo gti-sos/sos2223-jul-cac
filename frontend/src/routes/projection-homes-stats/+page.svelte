@@ -817,8 +817,12 @@
     {#if !showForm}
 
         <h2>
-            <center><p>Proyecciones de hogares: {projection.length}</p></center>
+            <center><p>Proyecciones de hogares</p></center>
         </h2>
+
+        <h3>
+            <center><p>Número de Datos: {projection.length}</p></center>
+        </h3>
 
         <!--Crear proyeccion -->
 

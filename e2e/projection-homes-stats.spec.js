@@ -84,7 +84,7 @@ test('Verifies the filtering route', async ({ page }) => {
 
   await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats');
 
-  const filterButton = await page.locator('a:has-text("Filtrar proyecciones")');
+  const filterButton = await page.locator('a:has-text("Filtrar")');
 
   await filterButton.click();
 
@@ -96,7 +96,7 @@ test('Verifies the filtering route', async ({ page }) => {
 
 test('Verifies access of integrations route', async ({ page }) => {
 
-  await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats/integrations');
+  await page.goto('https://sos2223-jul-cac.appspot.com/integrations');
 
   await expect(page).toHaveTitle("Integraciones y Usos");
 
@@ -106,7 +106,7 @@ test('Verifies access of integrations route', async ({ page }) => {
 
 test('Verifies the routes of buttons in integrations route', async ({ page }) => {
 
-  await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats/integrations');
+  await page.goto('https://sos2223-jul-cac.appspot.com/integrations');
 
   await page.locator('Button[href="/integrations/highcharts"]');
   await page.locator('Button[href="/integrations/billboard"]');
@@ -122,7 +122,7 @@ test('Verifies the routes of buttons in integrations route', async ({ page }) =>
 
 test('Verifies access of integrations route -> Highcharts', async ({ page }) => {
 
-  await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats/integrations/highcharts');
+  await page.goto('https://sos2223-jul-cac.appspot.com/integrations/highcharts');
 
   await expect(page).toHaveTitle("Gráfica Highcharts");
 
@@ -130,7 +130,7 @@ test('Verifies access of integrations route -> Highcharts', async ({ page }) => 
 
 test('Verifies access of integrations route -> Billboard', async ({ page }) => {
 
-  await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats/integrations/billboard');
+  await page.goto('https://sos2223-jul-cac.appspot.com/integrations/billboard');
 
   await expect(page).toHaveTitle("Gráfica Billboard");
 
@@ -138,7 +138,7 @@ test('Verifies access of integrations route -> Billboard', async ({ page }) => {
 
 test('Verifies access of integrations route -> Canvas', async ({ page }) => {
 
-  await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats/integrations/external/movies');
+  await page.goto('https://sos2223-jul-cac.appspot.com/integrations/external/movies');
 
   await expect(page).toHaveTitle("Gráfica Canvas");
 
@@ -146,7 +146,7 @@ test('Verifies access of integrations route -> Canvas', async ({ page }) => {
 
 test('Verifies access of integrations route -> Plotly', async ({ page }) => {
 
-  await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats/integrations/external/rates');
+  await page.goto('https://sos2223-jul-cac.appspot.com/integrations/external/rates');
 
   await expect(page).toHaveTitle("Gráfica Plotly");
 
@@ -154,7 +154,7 @@ test('Verifies access of integrations route -> Plotly', async ({ page }) => {
 
 test('Verifies access of integrations route -> Echarts', async ({ page }) => {
     
-  await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats/integrations/external/earthquake');
+  await page.goto('https://sos2223-jul-cac.appspot.com/integrations/external/earthquake');
 
   await expect(page).toHaveTitle("Gráfica ECharts");
 
@@ -162,7 +162,7 @@ test('Verifies access of integrations route -> Echarts', async ({ page }) => {
 
 test('Verifies access of integrations route -> Apexcharts', async ({ page }) => {
 
-  await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats/integrations/external/traffic');
+  await page.goto('https://sos2223-jul-cac.appspot.com/integrations/external/traffic');
 
   await expect(page).toHaveTitle("Gráfica Apexcharts");
 
@@ -170,7 +170,7 @@ test('Verifies access of integrations route -> Apexcharts', async ({ page }) => 
 
 test('Verifies access of integrations route -> Chart', async ({ page }) => {
 
-  await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats/integrations/external/nfl');
+  await page.goto('https://sos2223-jul-cac.appspot.com/integrations/external/nfl');
 
   await expect(page).toHaveTitle("Gráfica Chart");
 
