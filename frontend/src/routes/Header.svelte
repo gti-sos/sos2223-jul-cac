@@ -6,10 +6,6 @@
     Nav,
     NavItem,
     NavLink,
-    Dropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
   } from "sveltestrap";
 
   import SvelteIcon from './SvelteIcon.svelte'

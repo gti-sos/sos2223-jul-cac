@@ -2,25 +2,13 @@
 
     import {
         Button,
-        Table,
-        Modal,
-        ModalBody,
-        ModalFooter,
-        ModalHeader,
         Container,
-        Label,
-        Input,
-        Form,
-        FormGroup,
-        Card,
-        CardTitle,
-        Alert,
     } from "sveltestrap";
 
 </script>
 
 <svelte:head>
-    <title>Vídeos</title>
+    <title>Vídeo</title>
 </svelte:head>
 
 <Container>

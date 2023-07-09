@@ -2,8 +2,9 @@
 
 import Datastore from 'nedb';
 
+import request from 'request';
+
 var db = new Datastore();
-var noData = false;
 
 // Modularizar la app
 
@@ -73,16 +74,16 @@ var projectionHomes = [
     { province: "Jaén",	year: 2009,	couple_children: 1138494, couple_nochildren: 531457, single_parent:175794 },
     { province: "Jaén",	year: 2010,	couple_children: 1157114, couple_nochildren: 531970, single_parent:174790 },
 
-    { province: "Málaga", year:	2007, couple_children: 2414733, couple_nochildren: 1020268,	single_parent: 476654 },
-    { province: "Málaga", year:	2008, couple_children: 2255481,	couple_nochildren: 1176578,	single_parent: 496190 }, 
-    { province: "Málaga", year:	2009, couple_children: 2461516,	couple_nochildren: 1192378,	single_parent: 514051 }, 
-    { province: "Málaga", year:	2010, couple_children: 2473148,	couple_nochildren: 1170040,	single_parent: 613185 },
     { province: "Málaga", year: 2002, couple_children: 2126565, couple_nochildren: 764957, single_parent: 549488 },
     { province: "Málaga", year:	2003, couple_children: 2151903, couple_nochildren: 775440, single_parent: 554023 },
     { province: "Málaga", year:	2004, couple_children: 2232270, couple_nochildren: 824201, single_parent: 493219 },
     { province: "Málaga", year:	2005, couple_children: 2283130, couple_nochildren: 924316, single_parent: 505388 },
     { province: "Málaga", year:	2006, couple_children: 2382660, couple_nochildren: 917733, single_parent: 528165 },
-
+    { province: "Málaga", year:	2007, couple_children: 2414733, couple_nochildren: 1020268,	single_parent: 476654 },
+    { province: "Málaga", year:	2008, couple_children: 2255481,	couple_nochildren: 1176578,	single_parent: 496190 }, 
+    { province: "Málaga", year:	2009, couple_children: 2461516,	couple_nochildren: 1192378,	single_parent: 514051 }, 
+    { province: "Málaga", year:	2010, couple_children: 2473148,	couple_nochildren: 1170040,	single_parent: 613185 },
+    
     { province: "Sevilla", year: 2002, couple_children: 2902647, couple_nochildren: 1089913, single_parent:	519509 },
     { province: "Sevilla", year: 2003, couple_children: 2909823, couple_nochildren: 1006532, single_parent: 588930 },
     { province: "Sevilla", year: 2004, couple_children: 3010156, couple_nochildren: 1005396, single_parent: 603765 }, 
@@ -119,6 +120,16 @@ app.get(BASE_API_URL_PROJECT + "/docs", (request, response) => {
 
 });
 
+// Usar proxy para una api externa
+
+app.use(BASE_API_URL_PROJECT + "/proxy", (req, response) => {
+
+    const proxyUrl = "https://www.data.act.gov.au/resource/426s-vdu4.json";
+
+    req.pipe(request(proxyUrl)).pipe(response);
+
+});
+
 // Cargar datos en la base de datos
 
 app.get(BASE_API_URL_PROJECT + "/loadInitialData", (request, response) => {
@@ -144,8 +155,6 @@ app.get(BASE_API_URL_PROJECT + "/loadInitialData", (request, response) => {
         else {
 
             if(count === 0) {
-
-                noData = true;
 
                 db.insert(projectionHomes);
 

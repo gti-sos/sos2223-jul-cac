@@ -694,17 +694,22 @@
 
 </script>
 
+<svelte:head>
+    <title>Projection-homes-stats</title>
+</svelte:head>
+
 <h2>
 
     <!-- Alertas proyecciones: Borrar todos los recursos -->
 
     <Modal isOpen={open} {toggle}>
         <ModalHeader {toggle}
-            >Atención: Vas a borrar todos los recursos de la base de datos</ModalHeader
+            >Atención: Vas a borrar todos los recursos de la base de datos.</ModalHeader
         >
-        <ModalBody>¿Estás seguro?</ModalBody>
+        <ModalBody><center>¿Desea eliminarlo?</center></ModalBody>
         <ModalFooter>
             <Button
+                class = {botonesAviso}
                 color="danger"
                 on:click={() => {
                     deleteProjections();
@@ -712,7 +717,7 @@
                 }}
                 >Eliminar
             </Button>
-            <Button color="secondary" on:click={toggle}>Cancelar</Button>
+            <Button class = {botonesAviso} color="secondary" on:click={toggle}>Cancelar</Button>
         </ModalFooter>
     </Modal>
 
@@ -722,7 +727,7 @@
         <ModalHeader {toggleOne}
             >Atención: Vas a borrar el recurso seleccionado de la base de datos.</ModalHeader
         >
-        <ModalBody><center>¿Estás seguro?</center></ModalBody>
+        <ModalBody><center>¿Desea eliminarlo?</center></ModalBody>
         <ModalFooter>
             <Button
                 class = {botonesAviso}

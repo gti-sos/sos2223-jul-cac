@@ -13,6 +13,6 @@
 
     <Header />
 
-    <slot class="slot" />
+    <slot class="slot"/>
 
 </main>

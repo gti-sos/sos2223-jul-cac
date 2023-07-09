@@ -1,37 +1,33 @@
 <script>
 
-  // Importaciones
+  // Importaciones 
 
   import { onMount } from "svelte";
 
   import { dev } from "$app/environment";
 
-  import bb, {areaStep} from "billboard.js";
+  import bb, { bar, line } from "billboard.js";
+
+  import "billboard.js/dist/theme/graph.css";
+
+  import { } from "./style.css";
 
   let API = "/api/v2/projection-homes-stats";
 
-  if (dev) 
-  
-      API = "http://localhost:12345" + API;
+  if (dev) {
 
-  // Variables
+    API = "http://localhost:12345" + API;
+
+  }
+
+  // Variables y resultados
 
   let projection = [];
-  let province = [];
-  let year = [];
-  let couple_children = [];
-  let couple_nochildren = [];
-  let single_parent = [];
-  let yAxisMinValue = null;
-  let yAxisMaxValue = null;
 
-   // Mostrar resultados
+  let result = "";
 
-   let result = "";
+  let resultStatus = "";
 
-   let resultStatus = "";
-
-  // Obtener proyecciones
 
   onMount(async () => {
 
@@ -39,50 +35,37 @@
 
   });
 
-  // Obtener proyecciones
-
   async function getProjection() {
 
     resultStatus = result = "";
 
     const res = await fetch(API, {
 
-        method: "GET",
+      method: "GET",
 
     });
 
-  try {
+    try {
 
-    const data = await res.json();
+      const data = await res.json();
 
-    result = JSON.stringify(data, null, 2);
+      result = JSON.stringify(data, null, 2);
 
-    projection = data;
+      projection = data;
 
-    projection.forEach((project) => {
+      loadGraph(projection);
 
-      if (project.year >= 2002 && project.year <= 2005) {
-                
-                province.push(project.province);
-                couple_children.push(project.couple_children);
-                couple_nochildren.push(project.couple_nochildren);
-                single_parent.push(project.single_parent);
-      }
-            });
+    } 
+    
+    catch (error) {
 
-    loadGraph(projection);
+      console.log(`Error parsing result: ${error}`);
 
-  } 
+    }
 
-  catch (error) {
+    const status = await res.status;
 
-    console.log(`Error parseando el resultado: ${error}`);
-
-  }
-
-  const status = await res.status;
-
-  resultStatus = status;
+    resultStatus = status;
 
   }
 
@@ -90,171 +73,94 @@
 
   function loadGraph() {
 
-    // Calcular suma de datos para cada provincia
-  const provinceData = {};
-  projection.forEach((project) => {
-    if (project.year >= 2002 && project.year <= 2005) {
-      const province = project.province;
-      if (!provinceData[province]) {
-        provinceData[province] = {
-          province,
-          couple_children: 0,
-          couple_nochildren: 0,
-          single_parent: 0,
-        };
+    const provinceData = {};
+    projection.forEach((project) => {
+      if (project.year >= 2002 && project.year <= 2010) {
+        const province = project.province;
+        if (!provinceData[province]) {
+          provinceData[province] = {
+            province,
+            couple_children: 0,
+            couple_nochildren: 0,
+            single_parent: 0,
+          };
+        }
+
+        provinceData[province].couple_children += project.couple_children;
+        provinceData[province].couple_nochildren += project.couple_nochildren;
+        provinceData[province].single_parent += project.single_parent;
+
       }
-      provinceData[province].couple_children += project.couple_children;
-      provinceData[province].couple_nochildren += project.couple_nochildren;
-      provinceData[province].single_parent += project.single_parent;
-    }
-  });
+    });
 
-  // Extraer los datos de las provincias calculadas
-  const provinces = Object.values(provinceData);
+    const provinces = Object.values(provinceData);
 
-  const columns = [
-    ["x", ...provinces.map((province) => province.province)],
-    ["Familia con hijos", ...provinces.map((province) => province.couple_children)],
-    ["Familia sin hijos", ...provinces.map((province) => province.couple_nochildren)],
-    ["Personas solteras", ...provinces.map((province) => province.single_parent)],
-  ];
+    const columns = [
+      ["x", ...provinces.map((province) => province.province)],
+      ["Personas con hijos/as", ...provinces.map((province) => province.couple_children)],
+      ["Personas sin hijos/as", ...provinces.map((province) => province.couple_nochildren)],
+      ["Personas solteras", ...provinces.map((province) => province.single_parent)],
+    ];
 
-  bb.generate({
-    bindto: "#chart-container",
-    data: {
-      x: "x",
-      columns,
-      type: areaStep(),
-      labels: true,
-    },
-    axis: {
-      x: {
-        type: "category",
-      },
-      y: {
-        label: {
-          text: "Cantidad",
-          position: "outer-middle",
+    bb.generate({
+
+      bindto: "#chart-container",
+
+      data: {
+        x: "x",
+        columns,
+        types: {
+          "Personas con hijos/as": bar(),
+          "Personas sin hijos/as": bar(),
+          "Personas solteras": line(),
         },
-        min: yAxisMinValue, // Valor mínimo del eje y
-        max: yAxisMaxValue, // Valor máximo del eje y
+        labels: {
+          format: function (d) {
+          return d.toLocaleString(); 
+        },
       },
-    },
-    title: {
-      text: "Proyección de hogares por provincia (2002-2005)",
-    },
-    legend: {
-      show: true,
-    },
-    tooltip: {
-      show: true,
-    },
-    interaction: {
-      enabled: true,
-    },
-  });
-}
+        point: {
+          show: true,
+        },
+      },
 
-// Función para manejar el cambio en el menú desplegable del eje y
-function handleYAxisRangeChange(event) {
-  const [minValue, maxValue] = event.target.value.split(",");
-  adjustYAxisRange(parseFloat(minValue), parseFloat(maxValue));
-}
+      axis: {
+        x: {
+          type: "category",
+        },
+        y: {
+          label: {
+            text: "Cantidad",
+            position: "outer-middle",
+          },
+          tick: {
+            format: function (d) {
+          return d.toLocaleString(); 
+        },
+      },
+        },
+      },
 
-  // Función para ajustar el rango del eje y
-  function adjustYAxisRange(minValue, maxValue) {
-  yAxisMinValue = minValue;
-  yAxisMaxValue = maxValue;
-  loadGraph();
-}
+      title: {
+        text: "Proyección de hogares completa.",
+      },
 
+      legend: {
+        show: true,
+      },
 
-    
+      color: {
+        pattern: ["#4c84ff", "#ff7e68", "#5cd1b3"],
+      },
+
+    });
+
+  }
+
 </script>
 
-<div class="dropdown-container">
-  <select class="dropdown" on:change={handleYAxisRangeChange}>
-    <option value="null,null">Restablecer</option>
-    <option value="0,1000000">De 0 a 1M</option>
-    <option value="1000000,5000000">De 1M a 5M</option>
-    <option value="5000000,10000000">De 5M a 10M</option>
-    <option value="10000000,15000000">De 10M a 15M</option>
-  </select>
-</div>
+<main>
 
-<style>
-
-#chart-container {
-    width: 100%;
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .dropdown-container {
-    text-align: right;
-    margin-bottom: 20px;
-  }
-
-  .dropdown {
-    padding: 12px 20px;
-    border-radius: 4px;
-    border: 1px solid #999;
-    background-color: #f5f5f5;
-    color: #333;
-    font-size: 14px;
-    cursor: pointer;
-    outline: none;
-    transition: background-color 0.3s;
-  }
-
-  .dropdown:focus {
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-    background-color: #e8e8e8;
-  }
-
-
-
-</style>
-    <svelte:head>
-
-            <script src="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.js"></script>
-            <link rel="stylesheet" href="https://naver.github.io/billboard.js/release/latest/dist/billboard.min.css">
-
-    </svelte:head>
-
-    
-    
-    <main>
-        
-        <div id="chart-container" align="center"></div>
-        <br><br>
-    </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <div id="chart-container" class="chart-container" align="center"></div>
   
+</main>

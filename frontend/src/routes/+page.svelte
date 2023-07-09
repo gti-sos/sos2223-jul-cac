@@ -14,7 +14,7 @@
 </script>
 
 <svelte:head>
-    <title>SOS2223-JUL-CAC</title>
+    <title>Inicio</title>
 </svelte:head>
 
 <Container>

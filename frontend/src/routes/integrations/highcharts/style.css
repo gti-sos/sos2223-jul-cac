@@ -1,0 +1,21 @@
+#container {
+    width: 100%; 
+    height: 400px; 
+    margin-top: 20px; 
+  }
+  
+  .highcharts-title {
+    font-size: 18px; 
+    font-weight: bold; 
+    margin-bottom: 20px; 
+  }
+  
+  .highcharts-axis-labels {
+    font-size: 12px; 
+  }
+  
+  .highcharts-axis-title {
+    font-size: 14px; 
+    font-weight: bold; 
+  }
+  

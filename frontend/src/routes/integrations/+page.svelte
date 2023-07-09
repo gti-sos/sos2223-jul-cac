@@ -15,16 +15,16 @@
     let rutasInternas = [
 
         {
-            title: "Proyección de hogares sobre parejas (2002 - 2010)",
+            title: "Proyección de hogares sobre parejas (2005 - 2010) en Jaén.",
             technology: "Highcharts",
-            widget: "Pie",
+            widget: "Area",
             href: "/integrations/highcharts"
         },
   
         {
-            title: "Proyección de hogares por provincia (2002 - 2005)",
+            title: "Proyección de hogares completa, por todos los datos almacenados.",
             technology: "BillBoard",
-            widget: "AreaStep",
+            widget: "Bar + Line",
             href: "/integrations/billboard"
         },
     ];
@@ -32,18 +32,54 @@
     let rutasExternas = [
 
         {
-            title: "Scores in CS:GO (API Externa)",
-            technology: "BillBoard",
-            widget: "Spline",
-            href: "/integrations/external/games"
+            title: "Valoración Películas de IMDB.",
+            technology: "Canvas",
+            widget: "Donut",
+            href: "/integrations/external/movies"
 
         },
+
+        {
+
+          title: "Tasas de Bancos Centrales.",
+          technology: "Plotly",
+          widget: "Area",
+          href: "/integrations/external/rates"
+
+        },
+
+        {
+
+          title: "Terremotos en Indonesia.",
+          technology: "Echarts",
+          widget: "Bubble",
+          href: "/integrations/external/earthquake"
+
+        },
+
+        {
+
+          title: "Ubicación Cámaras Tráfico en Australia (Proxy).",
+          technology: "Apexcharts",
+          widget: "Scatter",
+          href: "/integrations/external/traffic"
+
+        },
+
+        {
+
+        title: "Estadísticas de equipos NFL.",
+        technology: "Chart",
+        widget: "Radar",
+        href: "/integrations/external/nfl"
+
+        }
         
     ];
 </script>
 
 <svelte:head>
-    <title>Integraciones</title>
+    <title>Integraciones y Usos</title>
 </svelte:head>
 
 <Container class="bg-light border my-5 mx-auto">
