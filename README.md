@@ -6,25 +6,25 @@
 ![Known Vulnerabilities](https://snyk.io/test/github/gti-sos/SOS2223-11/badge.svg)
 
 -------------------------
-- **Equipo**
+- **Equipo:**
    - [Christian Asuero Carrellán](https://github.com/chrasucar342)
 
-- **Project description**: Our project aims to analyze the household structures.
+- **Descripción del proyecto**: El proyecto tiene como objetivo analizar las estructuras de los hogares.
 
-- **Repository**: [gti-sos/sos2223-jul-cac](https://github.com/gti-sos/sos2223-jul-cac)
+- **Repositorio**: [gti-sos/sos2223-jul-cac](https://github.com/gti-sos/sos2223-jul-cac)
 
 - **URL**: [https://sos2223-jul-cac.appspot.com](https://sos2223-jul-cac.appspot.com)
 
-- **Interfaces**
+- **Interfaces:**
    - [https://sos2223-jul-cac.appspot.com/projection-homes-stats](https://sos2223-jul-cac.appspot.com/projection-homes-stats) (developed by Christian Asuero Carrellán)
 
-- **APIs**
+- **APIs:**
    - v1:
       - [https://sos2223-jul-cac.appspot.com/api/v1/projection-homes-stats](https://sos2223-jul-cac.appspot.com/api/v1/projection-homes-stats) (developed by Christian Asuero Carrellán) 
    - v2:
       - [https://sos2223-jul-cac.appspot.com/api/v2/projection-homes-stats](https://sos2223-jul-cac.appspot.com/api/v2/projection-homes-stats) (developed by Christian Asuero Carrellán)
 
-- **Documentación de Postman**
+- **Documentación de Postman:**
    - v1:
       - [https://sos2223-jul-cac.appspot.com/api/v1/projection-homes-stats/docs](https://sos2223-jul-cac.appspot.com/api/v1/projection-homes-stats/docs) (developed by Christian Asuero Carrellán) 
    - v2:

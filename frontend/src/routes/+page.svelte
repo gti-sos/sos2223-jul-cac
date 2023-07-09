@@ -26,7 +26,7 @@
 
         <Row>
             <Col>
-                <strong>Equipo</strong>
+                <strong>Equipo:</strong>
                 <ul>
                     {#each teamMembers as member}
                         <li>
@@ -41,7 +41,7 @@
         <Row>
             <Col>
                 <p>
-                    <strong>Descripción del proyecto</strong>: Nuestro proyecto
+                    <strong>Descripción del proyecto:</strong>: El proyecto
                     tiene como objetivo analizar las estructuras de los hogares.
                 </p>
             </Col>
@@ -61,7 +61,7 @@
         <Row>
             <Col>
                 <p>
-                    <strong>URL del proyecto</strong>:
+                    <strong>URL del proyecto:</strong>:
                     <a href={url}
                         >{url}</a
                     >
@@ -71,7 +71,7 @@
 
         <Row>
             <Col>
-                <p><strong>Interfaz</strong></p>
+                <p><strong>Interfaz:</strong></p>
                 <ul>
                     {#each teamMembers as member}
                     <li>
@@ -87,10 +87,10 @@
         </Row>
         <Row>
             <Col>
-                <p><strong>APIs</strong></p>
+                <p><strong>APIs:</strong></p>
                 <ul>
                     <li>
-                        v1
+                        v1:
                         <ul>
                             {#each teamMembers as member}
                             <li>
@@ -104,7 +104,7 @@
                         </ul>
                     </li>
                     <li>
-                        v2
+                        v2:
                         <ul>
                             {#each teamMembers as member}
                             <li>
@@ -122,10 +122,10 @@
         </Row>
         <Row>
             <Col>
-                <p><strong>Documentación de Postman</strong></p>
+                <p><strong>Documentación de Postman:</strong></p>
                 <ul>
                     <li>
-                        v1
+                        v1:
                         <ul>
                             {#each teamMembers as member}
                             <li>
@@ -139,7 +139,7 @@
                         </ul>
                     </li>
                     <li>
-                        v2
+                        v2:
                         <ul>
                             {#each teamMembers as member}
                             <li>
