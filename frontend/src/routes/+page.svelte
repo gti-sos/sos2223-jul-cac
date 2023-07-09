@@ -50,7 +50,7 @@
         <Row>
             <Col>
                 <p>
-                    <strong>Repositorio</strong>:
+                    <strong>Repositorio:</strong>
                     <a href="https://github.com/gti-sos/sos2223-jul-cac"
                         >gti-sos/sos2223-jul-cac</a
                     >
@@ -61,7 +61,7 @@
         <Row>
             <Col>
                 <p>
-                    <strong>URL del proyecto:</strong>:
+                    <strong>URL del proyecto:</strong>
                     <a href={url}
                         >{url}</a
                     >
