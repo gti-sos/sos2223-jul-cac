@@ -35,7 +35,7 @@ jobs:
         run: npm start &
 
       - name: Run Backend tests
-        run: npm test-projection-homes-stats
+        run: npm test
       
       - name: Run e2e tests
         run: npx playwright test
