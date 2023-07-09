@@ -71,7 +71,7 @@
         title: "Estadísticas de equipos NFL.",
         technology: "Chart",
         widget: "Radar",
-        href: "/integrations/external/nfl"
+        href: "/integrations/external/teams"
 
         }
         

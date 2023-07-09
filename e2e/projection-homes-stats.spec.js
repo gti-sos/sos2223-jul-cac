@@ -62,6 +62,8 @@ test('Verifies the buttons inside the first projection', async ({ page }) => {
 
   await page.waitForTimeout(3000);
 
+  await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats');
+
 });
 
 // Verificar que haya la ruta de integraciones
@@ -86,7 +88,7 @@ test('Verifies the routes of buttons in integrations route', async ({ page }) =>
   await page.locator('Button[href="/integrations/external/rates"]');
   await page.locator('Button[href="/integrations/external/earthquake"]');
   await page.locator('Button[href="/integrations/external/traffic"]');
-  await page.locator('Button[href="/integrations/external/nfl"]');
+  await page.locator('Button[href="/integrations/external/teams"]');
 
 });
 
@@ -142,7 +144,7 @@ test('Verifies access of integrations route -> Apexcharts', async ({ page }) => 
 
 test('Verifies access of integrations route -> Chart', async ({ page }) => {
 
-  await page.goto('http://sos2223-jul-cac.appspot.com/integrations/external/nfl');
+  await page.goto('https://sos2223-jul-cac.appspot.com/integrations/external/teams');
 
   await expect(page).toHaveTitle("Gráfica Chart");
 
