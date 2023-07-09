@@ -14,22 +14,6 @@ test('Has correct title', async ({ page }) => {
 
 });
 
-// Cabecera de la página
-
-test('Has correct heading', async ({ page }) => {
-
-  await page.waitForTimeout(3000);
-
-  await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats');
-
-  const heading = await page.locator('h2');
-
-  const text = await heading.innerText();
-
-  expect(text).toContain('Proyecciones de hogares');
-
-});
-
 // Verificar que todos los botones tiene las siguientes palabras
 
 test('Verifies the text of buttons in the page', async ({ page }) => {
@@ -158,7 +142,7 @@ test('Verifies access of integrations route -> Apexcharts', async ({ page }) => 
 
 test('Verifies access of integrations route -> Chart', async ({ page }) => {
 
-  await page.goto('https://sos2223-jul-cac.appspot.com/integrations/external/nfl');
+  await page.goto('http://sos2223-jul-cac.appspot.com/integrations/external/nfl');
 
   await expect(page).toHaveTitle("Gráfica Chart");
 

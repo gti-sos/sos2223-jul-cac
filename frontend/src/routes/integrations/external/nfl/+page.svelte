@@ -3,6 +3,7 @@
     // Importaciones
 
     import { onMount } from "svelte";
+
     import Chart from "chart.js/auto";
   
     var myHeaders = new Headers();
@@ -39,6 +40,7 @@
         // Cargar gráfico
 
         generateChart();
+
       } 
 
       else {
