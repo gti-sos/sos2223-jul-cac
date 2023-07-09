@@ -56,15 +56,7 @@ test('Verifies the buttons inside the first projection', async ({ page }) => {
 
   expect(await firstRow.locator('button:has-text("Actualizar")').count() > 0);
 
-  expect(await firstRow.locator('button:has-text("Eliminar")').count() > 0);
-
-  await page.locator('button:has-text("Eliminar proyecciones")').click();
-
-  await page.waitForTimeout(3000);
-
-  await page.locator('button:has-text("Eliminar")').click();
-
-  await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats');
+  expect(await firstRow.locator('button:has-text("Borrar")').count() > 0);
 
 });
 

@@ -36,10 +36,6 @@
           y: parseRecord(team.record),
 
         }));
-  
-        // Cargar gráfico
-
-        generateChart();
 
       } 
 
@@ -48,7 +44,6 @@
         console.log("Error al obtener los datos de la API");
 
       }
-    });
   
     function parseRecord(record) {
 
@@ -62,8 +57,6 @@
 
       };
     }
-  
-    function generateChart() {
 
       const ctx = document.getElementById("chart");
 
@@ -139,7 +132,8 @@
           },
         },
       });
-    }
+      chart.render();
+  });
 
   </script>
   
