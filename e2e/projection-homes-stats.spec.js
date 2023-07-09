@@ -82,7 +82,7 @@ test('Verifies the routes of buttons in integrations route', async ({ page }) =>
   await page.locator('Button[href="/integrations/external/rates"]');
   await page.locator('Button[href="/integrations/external/earthquake"]');
   await page.locator('Button[href="/integrations/external/traffic"]');
-  await page.locator('Button[href="/integrations/external/teams"]');
+  await page.locator('Button[href="/integrations/external/songs"]');
 
 });
 
@@ -136,10 +136,10 @@ test('Verifies access of integrations route -> Apexcharts', async ({ page }) => 
 
 });
 
-test('Verifies access of integrations route -> Chart', async ({ page }) => {
+test('Verifies access of integrations route -> Canvas', async ({ page }) => {
 
   await page.goto('http://sos2223-jul-cac.appspot.com/integrations/external/songs');
 
-  await expect(page).toHaveTitle("Gráfica Chart");
+  await expect(page).toHaveTitle("Gráfica Canvas");
 
 });
