@@ -134,7 +134,7 @@ app.use(BASE_API_URL_PROJECT + "/proxy", (req, response) => {
 
 app.get(BASE_API_URL_PROJECT + "/loadInitialData", (request, response) => {
 
-    db.count({}, (error, count) => {
+    db.find({}, (error, count) => {
 
         if(error) {
 
@@ -144,29 +144,40 @@ app.get(BASE_API_URL_PROJECT + "/loadInitialData", (request, response) => {
 
         }
 
-        else if(count > 0) {
+        else {
 
-            console.log("More than 0 datas");
+            if(count.length > 0) {
 
-            response.sendStatus(409);
+                console.log("More than 0 datas");
+
+                response.sendStatus(409);
             
         }
 
         else {
 
-            if(count === 0) {
+            db.insert(projectionHomes, (error, projects) => {
 
-                db.insert(projectionHomes);
+                if (error) {
 
-                console.log(`Inserted ${projectionHomes.length}`);
+                    console.log("Error inserting datas");
+
+                    response.sendStatus(500); // Internal Server Error
+
+                } 
+            
+                else {
+
+                console.log(`Inserted ${projects.length} datas`);
+
+                response.sendStatus(200); // OK
 
             }
-
-            response.sendStatus(200); // Ok
-
-        }
-    })
-    });
+        });
+    }
+}
+});
+});
 
 //--------------------------------------Métodos GET-------------------------------------
 
