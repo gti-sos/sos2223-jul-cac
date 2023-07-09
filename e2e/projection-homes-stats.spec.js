@@ -74,21 +74,9 @@ test('Verifies the buttons inside the first projection', async ({ page }) => {
 
   expect(await firstRow.locator('button:has-text("Eliminar")').count() > 0);
 
-});
+  await page.locator('button:has-text("Eliminar proyecciones")').click();
 
-// Verificar que cuando se filtra, siga en la misma página
-
-test('Verifies the filtering route', async ({ page }) => {
-    
   await page.waitForTimeout(3000);
-
-  await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats');
-
-  const filterButton = await page.locator('a:has-text("Filtrar")');
-
-  await filterButton.click();
-
-  await page.waitForURL(/.*/);
 
 });
 

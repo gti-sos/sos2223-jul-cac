@@ -817,7 +817,7 @@
     {#if !showForm}
 
         <h2>
-            <center><p>Proyecciones de hogares</p></center>
+            Proyecciones de hogares
         </h2>
 
         <h3>
