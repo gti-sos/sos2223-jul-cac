@@ -4,7 +4,7 @@
 
     import { onMount } from "svelte";
 
-    import Chart from "chart.js/auto";
+    import Chart from "chart.js";
 
     const url = 'https://youtube-search-results.p.rapidapi.com/youtube-search/?q=david%2Bguetta';
 
@@ -22,6 +22,8 @@
     let data = [];
   
     onMount(async () => {
+
+      let chart = await import("chart.js/auto");
 
       const response = await fetch(url, options);
   
@@ -70,7 +72,7 @@
  
   const ctx = document.getElementById("chart");
 
-      const chart = new Chart(ctx, {
+      chart = new Chart(ctx, {
       type: "radar",
 
       data: {

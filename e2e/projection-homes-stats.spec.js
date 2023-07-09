@@ -138,7 +138,7 @@ test('Verifies access of integrations route -> Apexcharts', async ({ page }) => 
 
 test('Verifies access of integrations route -> Chart', async ({ page }) => {
 
-  await page.goto('https://sos2223-jul-cac.appspot.com/integrations/external/songs');
+  await page.goto('http://sos2223-jul-cac.appspot.com/integrations/external/songs');
 
   await expect(page).toHaveTitle("Gráfica Chart");
 
