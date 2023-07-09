@@ -21,7 +21,7 @@
                 title="SOS2223-JUL-CAC Christian Asuero Carrellán"
                 width="1080"
                 height="720"
-                src="https://youtu.be/gQxPC4ELfHw"
+                src="https://www.youtube.com/embed/gQxPC4ELfHw"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen

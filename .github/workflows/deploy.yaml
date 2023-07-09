@@ -33,11 +33,11 @@ jobs:
       - name: Run app
         run: npm start &
 
-      # - name: Run Backend tests
-      #   run: npm test
+      - name: Run Backend tests
+        run: npm test
       
-      # - name: Run e2e tests
-      # run: npx playwright test
+      - name: Run e2e tests
+        run: npx playwright test
 
       - uses: actions/upload-artifact@v3
         if: always()
