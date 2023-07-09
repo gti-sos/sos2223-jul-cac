@@ -372,21 +372,7 @@
 
         const status = await res.status;
 
-        if(status === 409) {
-
-            messageAlert = true;
-
-            message = "Las proyecciones ya están cargadas.";
-
-            setTimeout(() => {message = '';}, 3000);
-
-            setTimeout(() => {color = '';}, 3000);
-
-            setTimeout(() => {messageAlert = '';}, 3000);
-
-            color = "warning";
-
-        }
+        
 
         if(status == 200) {
 
@@ -405,6 +391,22 @@
             color = "success";
 
         } 
+
+        else if(status === 409) {
+
+            messageAlert = true;
+
+            message = "Las proyecciones ya están cargadas.";
+
+            setTimeout(() => {message = '';}, 3000);
+
+            setTimeout(() => {color = '';}, 3000);
+
+            setTimeout(() => {messageAlert = '';}, 3000);
+
+            color = "warning";
+
+        }
 
         else {
 
