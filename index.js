@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.use(cors());
 
-// Rutas para carpetas diferentes
+// Rutas para las carpetas diferentes
 
 // --- Versión 1 ---
 
