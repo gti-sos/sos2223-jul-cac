@@ -69,8 +69,8 @@
         {
 
         title: "Estadísticas de canciones de David Guetta.",
-        technology: "Chart",
-        widget: "Radar",
+        technology: "Canvas",
+        widget: "Pie",
         href: "/integrations/external/songs"
 
         }
