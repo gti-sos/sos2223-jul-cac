@@ -4,8 +4,6 @@
 
     import { onMount } from "svelte";
 
-    import Chart from "chart.js";
-
     const url = 'https://youtube-search-results.p.rapidapi.com/youtube-search/?q=david%2Bguetta';
 
     const options = {
