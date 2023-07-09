@@ -915,7 +915,7 @@
                                         provinceDelete = projections.province;
                                         yearDelete = projections.year;
                                         toggleOne();
-                                    }}>Eliminar</Button
+                                    }}>Borrar</Button
                                 >
                             </div>
                         </td>

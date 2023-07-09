@@ -41,7 +41,7 @@
         <Row>
             <Col>
                 <p>
-                    <strong>Descripción del proyecto:</strong>: El proyecto
+                    <strong>Descripción del proyecto:</strong> El proyecto
                     tiene como objetivo analizar las estructuras de los hogares.
                 </p>
             </Col>

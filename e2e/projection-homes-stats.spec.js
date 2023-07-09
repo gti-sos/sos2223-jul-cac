@@ -62,6 +62,8 @@ test('Verifies the buttons inside the first projection', async ({ page }) => {
 
   await page.waitForTimeout(3000);
 
+  await page.locator('button:has-text("Eliminar")').click();
+
   await page.goto('https://sos2223-jul-cac.appspot.com/projection-homes-stats');
 
 });

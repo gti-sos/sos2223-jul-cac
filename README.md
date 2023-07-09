@@ -9,7 +9,7 @@
 - **Equipo:**
    - [Christian Asuero Carrellán](https://github.com/chrasucar342)
 
-- **Descripción del proyecto** El proyecto tiene como objetivo analizar las estructuras de los hogares.
+- **Descripción del proyecto:** El proyecto tiene como objetivo analizar las estructuras de los hogares.
 
 - **Repositorio**: [gti-sos/sos2223-jul-cac](https://github.com/gti-sos/sos2223-jul-cac)
 
