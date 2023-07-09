@@ -159,6 +159,10 @@
 
 </script>
 
+<svelte:head>
+    <title>Gráfica Billboard</title>
+</svelte:head>
+
 <main>
 
   <div id="chart-container" class="chart-container" align="center"></div>

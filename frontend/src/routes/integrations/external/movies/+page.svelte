@@ -65,7 +65,7 @@
   </script>
   
   <svelte:head>
-    <title>Integraciones y Usos</title>
+    <title>Gráfica Canvas</title>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   </svelte:head>
   

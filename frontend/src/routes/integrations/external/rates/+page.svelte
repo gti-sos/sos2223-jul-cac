@@ -75,7 +75,7 @@
 </script>
 
 <svelte:head>
-  <title>Integraciones y Usos</title>
+  <title>Gráfica Plotly</title>
 </svelte:head>
 
 <Container>

@@ -133,7 +133,12 @@
         chart.render();
       }
     });
+
   </script>
+
+<svelte:head>
+  <title>Gráfica Apexcharts</title>
+</svelte:head>
   
   <h1>Ubicación Cámaras Tráfico en Australia.</h1>
   

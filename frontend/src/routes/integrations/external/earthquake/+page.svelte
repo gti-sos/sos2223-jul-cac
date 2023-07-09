@@ -135,4 +135,8 @@
   });
 </script>
 
+<svelte:head>
+  <title>Gráfica ECharts</title>
+</svelte:head>
+
 <div bind:this={chartContainer} style="width: 1000px; height: 400px; margin: 50px auto;"></div>

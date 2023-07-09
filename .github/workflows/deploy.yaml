@@ -1,4 +1,5 @@
 # .github/workflows/deploy.yml
+
 name: Deploy to Cloud Run
 on:
   push:
@@ -16,28 +17,28 @@ jobs:
       
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
-      - name: Install backend dependencies
+      - name: Install Backend dependencies
         run: npm ci
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Install frontend dependences
+      - name: Install Frontend dependences
         run: cd frontend; npm install; cd ..
       
-      - name: Build frontend
+      - name: Build Frontend
         run: cd frontend; npm run build; cd ..
       
       - name: Run app
         run: npm start &
 
-      #- name: Run Backend tests
-      #  run: npm test
+      - name: Run Backend tests
+        run: npm test
       
-      #- name: Run e2e tests
-      #  run: npx playwright test
+      - name: Run e2e tests
+        run: npx playwright test
 
       - uses: actions/upload-artifact@v3
         if: always()

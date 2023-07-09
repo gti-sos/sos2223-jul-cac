@@ -121,9 +121,12 @@
         series: tipo
     })
     }
-    
-          
+  
 </script>
+
+<svelte:head>
+    <title>Gráfica Highcharts</title>
+</svelte:head>
 
 <main>
       <div id="container"/>

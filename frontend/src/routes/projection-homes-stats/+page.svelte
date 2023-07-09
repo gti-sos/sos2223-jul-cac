@@ -695,7 +695,7 @@
 </script>
 
 <svelte:head>
-    <title>Projection-homes-stats</title>
+    <title>Proyección de hogares</title>
 </svelte:head>
 
 <h2>

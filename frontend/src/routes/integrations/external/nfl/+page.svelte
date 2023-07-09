@@ -160,6 +160,10 @@ canvas {
 }
 
 </style>
+
+<svelte:head>
+  <title>Gráfica Chart</title>
+</svelte:head>
   
 <div id="chart-container">
 
