@@ -7,7 +7,6 @@
   "scripts": {
     "start": "node index",
     "test-projection-homes-stats": "npx newman run ./tests/backend-projection-homes-stats.json -e ./tests/env/gcloud-env.json",
-    "test": "npm run test-projection-homes-stats",
     "jest": "jest --coverage",
     "coverage-badges": "jest-coverage-badges coverage/coverage-final.json"
   },

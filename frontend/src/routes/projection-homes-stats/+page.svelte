@@ -388,7 +388,7 @@
 
         }
 
-        else if(projection.length > 0) {
+        else if(status == 200) {
 
             getProjection();
 
